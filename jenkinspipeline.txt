@@ -1,0 +1,43 @@
+pipeline {
+    agent any
+
+    environment {
+        registry = "waleedkayani14"
+        imageName = "psx_model"
+        dockerImage = ''
+        dockerCred = '80d91fe7-b2c7-4c8b-ba44-2117390f91ed'
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                git branch: 'main', url: 'https://github.com/WaleedK2000/pakistan-stock-exchange-predictor.git'
+                script {
+                    dockerImage = docker.build("${registry}/${imageName}")
+                }
+            }
+        }
+        
+        stage('Push') {
+            steps {
+                script {
+                    docker.withRegistry("", dockerCred) {
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
+        
+        stage('Launch container') {
+            steps {
+                script {
+                    docker.withRegistry(env.DOCKER_REGISTRY, dockerCred) {
+                        docker.image("${registry}/${imageName}").run("-p 5000:5000 --name ${imageName}")
+                    }
+                }
+            }
+        }
+        
+        
+    }
+}

@@ -4,7 +4,9 @@ This repository contains a linear classifier model that predicts the closing pri
 
 ## Dataset
 
-The dataset used in this model was obtained from Kaggle: https://www.kaggle.com/datasets/mirfanazam/pakistan-stock-exchange-complete. It contains historical data of Pakistan Stock Exchange from January 2012 to December 2018.
+The dataset used in this model was obtained from Kaggle: https://www.kaggle.com/datasets/mirfanazam/pakistan-stock-exchange-complete. This dataset contains data for 314 regular stocks from 1-Jan-2018 to 31-May-2022.
+
+
 
 ## Usage
 
